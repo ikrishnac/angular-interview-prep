@@ -9,6 +9,32 @@ import { Observable } from 'rxjs';
 export class AppComponent  {
 
   private time = new Observable(observable => {
-    setInterval(() => observable.next(new Date().toString()), 1000);
-  })
+    setInterval(() => observable.next(new Date().toString()));
+  });
+
+
+  ngOnInit() {
+    this.promiseTest();
+  }
+
+
+  private promiseTest() {
+    const promise = new Promise((resolve, reject) => {
+      if(true) {
+        setTimeout(()=> {
+          resolve('promise resloved');
+        }, 3000);
+      } else {
+        setTimeout(()=> {
+          reject('promise rejected');
+        }, 3000);
+      }
+    });
+
+    promise.then((res) => {
+      console.log(res);
+    }).catch((res) => {
+      console.log(res);
+    });  
+  }
 }
